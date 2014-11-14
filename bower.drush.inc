@@ -61,7 +61,8 @@ function drush_bower_install() {
     $cwd_path = dirname($pathname);
     $num_dirs = substr_count($cwd_path, '/') + 1;
     $libraries_path = str_repeat('../', $num_dirs) . 'libraries';
-    if (drush_shell_cd_and_exec($cwd_path, 'bower install --config.directory=%s', $libraries_path)) {
+    $command = 'bower install --config.directory=%s --allow-root';
+    if (drush_shell_cd_and_exec($cwd_path, $command, $libraries_path)) {
       drush_log(dt('Successfully installed !bower.', array('!bower' => $pathname)), 'ok');
     }
     else {
